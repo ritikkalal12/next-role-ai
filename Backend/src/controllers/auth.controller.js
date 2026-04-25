@@ -64,6 +64,12 @@ async function registerUserController(req, res) {
   });
 }
 
+/**
+ * @name loginUserController
+ * @desc Login a user
+ * @access Public
+ * @route POST /api/auth/login
+ */
 async function loginUserController(req, res) {
   // Implement login logic here
   const { email, password } = req.body;
@@ -108,6 +114,12 @@ async function loginUserController(req, res) {
   });
 }
 
+/**
+ * @name logoutUserController
+ * @desc Logout a user (blacklist the token)
+ * @access Public
+ * @route POST /api/auth/logout
+ */
 async function logoutUserController(req, res) {
   // Implement logout logic here (blacklist the token)
   const token = req.cookies.token;
@@ -124,8 +136,25 @@ async function logoutUserController(req, res) {
   return res.status(200).json({ message: 'Logout successful' });
 }
 
+/**
+ * @name getMeController
+ * @desc Get the authenticated user's information
+ * @access Private
+ * @route GET /api/auth/get-me
+ */
+async function getMeController(req, res) {
+  // The authenticated user's information is available in req.user
+  const user = await userModel.findById(req.user.id);
+  res.status(200).json({
+    id: user._id,
+    username: user.username,
+    email: user.email,
+  });
+}
+
 module.exports = {
   registerUserController,
   loginUserController,
   logoutUserController,
+  getMeController,
 };
