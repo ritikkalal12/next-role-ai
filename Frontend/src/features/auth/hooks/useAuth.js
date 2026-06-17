@@ -24,4 +24,20 @@ export const useAuth = () => {
     setUser(data.user);
     setLoading(false);
   };
+
+  // Function to handle user logout by calling the logout API and clearing the user state
+  const handleLogout = async () => {
+    setLoading(true);
+    const data = await logout();
+    setUser(null);
+    setLoading(false);
+  };
+
+  return {
+    user,
+    loading,
+    handleRegister,
+    handleLogin,
+    handleLogout,
+  };
 };

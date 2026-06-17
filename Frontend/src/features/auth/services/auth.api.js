@@ -1,3 +1,6 @@
+// this file contains all the api calls related to authentication such as login, register, logout and getMe.
+// It uses axios to make HTTP requests to the backend server and handles the responses accordingly.
+
 import axios from 'axios';
 
 const api = axios.create({
