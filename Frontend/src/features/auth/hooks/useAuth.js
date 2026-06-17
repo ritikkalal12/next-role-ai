@@ -8,4 +8,12 @@ import { login, logout, register, getMe } from '../services/auth.api.js';
 export const useAuth = () => {
   const context = useContext(AuthConext);
   const { user, setUser, loading, setLoading } = context;
+
+  // Function to handle user login by calling the login API and updating the user state
+  const handleLogin = async (email, password) => {
+    setLoading(true);
+    const data = await login(email, password);
+    setUser(data.user);
+    setLoading(false);
+  };
 };
