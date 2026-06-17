@@ -16,4 +16,12 @@ export const useAuth = () => {
     setUser(data.user);
     setLoading(false);
   };
+
+  // Function to handle user registration by calling the register API and updating the user state
+  const handleRegister = async (username, email, password) => {
+    setLoading(true);
+    const data = await register(username, email, password);
+    setUser(data.user);
+    setLoading(false);
+  };
 };
