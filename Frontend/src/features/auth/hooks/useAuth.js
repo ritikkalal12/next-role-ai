@@ -12,25 +12,40 @@ export const useAuth = () => {
   // Function to handle user login by calling the login API and updating the user state
   const handleLogin = async (email, password) => {
     setLoading(true);
-    const data = await login(email, password);
-    setUser(data.user);
-    setLoading(false);
+    try {
+      const data = await login(email, password);
+      setUser(data.user);
+    } catch (error) {
+      console.error('Login failed:', error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   // Function to handle user registration by calling the register API and updating the user state
   const handleRegister = async (username, email, password) => {
     setLoading(true);
-    const data = await register(username, email, password);
-    setUser(data.user);
-    setLoading(false);
+    try {
+      const data = await register(username, email, password);
+      setUser(data.user);
+    } catch (error) {
+      console.error('Registration failed:', error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   // Function to handle user logout by calling the logout API and clearing the user state
   const handleLogout = async () => {
     setLoading(true);
-    const data = await logout();
-    setUser(null);
-    setLoading(false);
+    try {
+      const data = await logout();
+      setUser(null);
+    } catch (error) {
+      console.error('Logout failed:', error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return {
