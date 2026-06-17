@@ -1,9 +1,16 @@
 const express = require('express');
 const cookieParser = require('cookie-parser');
+const cors = require('cors');
 const app = express();
 
 app.use(express.json()); // Middleware to parse JSON request bodies
 app.use(cookieParser()); // Middleware to parse cookies
+app.use(
+  cors({
+    origin: 'http://localhost:5173',
+    credentials: true,
+  }),
+); // Middleware to enable Cross-Origin Resource Sharing (CORS)
 
 //require all the routes here
 const authRouter = require('./routes/auth.route');
